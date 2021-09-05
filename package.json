@@ -1,0 +1,31 @@
+{
+  "name": "reservation-vaccination",
+  "version": "1.0.0",
+  "description": "You are tasked to build a reservation system for COVID-19 vaccination in Singapore",
+  "author": "Eri Sitohang",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "db:setup": "npm run db:migrate && npm run db:seed",
+    "db:migrate": "knex --knexfile ./src/configs/db.js migrate:latest",
+    "db:seed": "knex --knexfile ./src/configs/db.js seed:run",
+    "db:rollback": "knex --knexfile ./src/configs/db.js migrate:rollback",
+    "test:fresh": "NODE_ENV=test npm run db:rollback && NODE_ENV=test npm run db:setup && PORT=8001 NODE_ENV=test  mocha --exit \"test/**/*.spec.js\"",
+    "test": "PORT=8001 NODE_ENV=test  mocha --exit \"test/**/*.spec.js\""
+  },
+  "engines": {
+    "node": "14.15.3",
+    "npm": "6.14.9"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.95.11",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
